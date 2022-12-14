@@ -244,6 +244,7 @@
       };
 
       getVotes();
+      setInterval(async () => await getVotes(), 600000);
 
       const openModal = async (candidate) => {
         const modalBody = document.getElementsByClassName("modal-body")[0];
