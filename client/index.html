@@ -185,9 +185,13 @@
     <script>
       const resetError = () => {
         document.getElementById("error-container").innerHTML = "";
+        document.getElementById("error-name").innerHTML = "";
+        document.getElementById("error-email").innerHTML = "";
+        document.getElementById("error-phone").innerHTML = "";
       };
 
       const vote = async () => {
+        resetError()
         const payload = {
           name: document.getElementById("fName").value,
           email: document.getElementById("fEmail").value,
@@ -211,8 +215,21 @@
         const data = await res.json();
 
         if (!res.ok) {
-          document.getElementById("error-container").innerHTML =
-            data?.message || "Mohon maaf terjadi gangguan server!";
+          if (data?.errors) {
+            const errors = data?.errors.reduce(function (rv, x) {
+              (rv[x["param"]] = rv[x["param"]] || []).push(x);
+              return rv;
+            }, {});
+
+            Object.keys(errors).forEach((key) => {
+              document.getElementById(`error-${key}`).innerHTML =
+                errors[key][0].msg;
+            });
+          } else {
+            document.getElementById("error-container").innerHTML =
+              data?.message || data?.errors;
+            ("Mohon maaf terjadi gangguan server!");
+          }
         } else {
           const modalBody = document.getElementsByClassName("modal-body")[0];
           const modalFooter =
@@ -259,6 +276,7 @@
                 placeholder="Masukan Nama Anda"
                 class="w-full rounded-md bg-[#f7f7f7] py-3 px-6 text-base text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
+              <span id="error-name" class="text-red-500 text-xs"></span>
             </div>
             <div class="mb-5">
               <label for="fEmail" class="mb-3 block text-base text-dark">
@@ -271,6 +289,7 @@
                 placeholder="Masukan Email Anda"
                 class="w-full rounded-md bg-[#f7f7f7] py-3 px-6 text-base text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
+              <span id="error-email" class="text-red-500 text-xs"></span>
             </div>
             <div class="mb-5">
               <label for="fPhone" class="mb-3 block text-base text-dark">
@@ -283,6 +302,7 @@
                 placeholder="Masukan Nomor HP Anda"
                 class="w-full rounded-md bg-[#f7f7f7] py-3 px-6 text-base text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
+              <span id="error-phone" class="text-red-500 text-xs"></span>
             </div>
             <div class="mb-5">
               <p id="error-container" class="text-red-500 text-xs"></p>
