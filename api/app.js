@@ -51,36 +51,41 @@ app.get("/participants", async (req, res) => {
   return res.send(clubs);
 });
 
-app.post("/participants", async (req, res) => {
+app.post("/votes", async (req, res) => {
   try {
     const name = req.body.name;
     const phone = req.body.phone;
-    const link = req.body.link;
-    const club = req.body.club;
+    const email = req.body.email;
+    const candidate = req.body.candidate;
 
-    const clubExist = await knex("clubs").where("name", club).first();
-    if (!clubExist) {
-      await knex("clubs").insert({ name: club });
+    let date = new Date()
+
+    const haveVoteToday = await knex("votes")
+      // TODO: tambah batasan waktu
+      // .where("created_at", ">=", date.setHours(0, 0, 0, 0))
+      // .where("created_at", "<", date.setHours(23, 59, 59))
+      .where(q => q.where('email', email).orWhere('phone', phone))
+      .first();
+
+    if (haveVoteToday) {
+      return res
+        .status(400)
+        .send({ message: "Vote Minimal 1 kali per email/nomor HP" });
     }
 
-    const linkExist = await knex("participants").where("link", link).first();
-    if (linkExist) {
-      return res.status(400).send({message: 'Link sudah pernah diinput'})
-    }
-
-    const id = await knex("participants").insert({
+    const id = await knex("votes").insert({
       name,
       phone,
-      link,
-      club,
+      email,
+      candidate,
     });
 
     res.json({
       id: id[0],
       name,
       phone,
-      link,
-      club,
+      email,
+      candidate,
     });
   } catch (e) {
     console.log(e);
