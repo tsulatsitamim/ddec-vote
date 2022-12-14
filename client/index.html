@@ -84,7 +84,8 @@
           />
           <button
             data-bs-toggle="modal"
-            data-bs-target="#formIndonesia"
+            data-bs-target="#formVote"
+            onclick="openModal('indonesia')"
             class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs lg:text-base leading-tight uppercase rounded-full shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2"
           >
             Vote
@@ -108,7 +109,8 @@
           />
           <button
             data-bs-toggle="modal"
-            data-bs-target="#formMalaysia"
+            data-bs-target="#formVote"
+            onclick="openModal('malaysia')"
             class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs lg:text-base leading-tight uppercase rounded-full shadow-md hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out absolute bottom-0 right-1/2 translate-x-1/2 translate-y-1/2"
           >
             Vote
@@ -116,7 +118,7 @@
         </div>
       </div>
     </section>
-    <script>
+    <!-- <script>
       const getData = async () => {
         try {
           const res = await fetch(
@@ -196,16 +198,12 @@
           "success"
         );
       };
-    </script>
+    </script> -->
     <daihatsu-footer></daihatsu-footer>
     <div
       class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-      id="formIndonesia"
+      id="formVote"
       data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
     >
       <div class="modal-dialog relative w-auto pointer-events-none">
         <div
@@ -215,10 +213,10 @@
             class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md"
           >
             <h5
-              class="text-xl font-medium leading-normal text-gray-800"
-              id="exampleModalLabel"
+              class="text-xl font-medium leading-normal text-gray-800 capitalize"
+              id="modalLabel"
             >
-              Form Vote Indonesia
+              Form Vote
             </h5>
             <button
               type="button"
@@ -279,98 +277,11 @@
                 class="w-full rounded-md bg-[#f7f7f7] py-3 px-6 text-base text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-          </div>
-          <div
-            class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md"
-          >
-            <button
-              type="button"
-              class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-      id="formMalaysia"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog relative w-auto pointer-events-none">
-        <div
-          class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current"
-        >
-          <div
-            class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md"
-          >
-            <h5
-              class="text-xl font-medium leading-normal text-gray-800"
-              id="exampleModalLabel"
-            >
-              Form Vote Malaysia
-            </h5>
-            <button
-              type="button"
-              class="box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <div class="modal-body relative p-4">
-            <div class="mb-5">
-              <label for="fName" class="mb-3 block text-base text-dark">
-                Nama
-              </label>
+            <div class="mb-5 hidden">
               <input
                 type="text"
-                name="fName"
-                id="fName"
-                placeholder="Masukan Nama Anda"
-                class="w-full rounded-md bg-[#f7f7f7] py-3 px-6 text-base text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
-            <div class="mb-5">
-              <label for="fEmail" class="mb-3 block text-base text-dark">
-                Email
-              </label>
-              <input
-                type="text"
-                name="fEmail"
-                id="fEmail"
-                placeholder="Masukan Email Anda"
-                class="w-full rounded-md bg-[#f7f7f7] py-3 px-6 text-base text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-              />
-            </div>
-            <div class="mb-5">
-              <label for="fPhone" class="mb-3 block text-base text-dark">
-                Nomor HP
-              </label>
-              <input
-                type="text"
-                name="fPhone"
-                id="fPhone"
-                placeholder="Masukan Nomor HP Anda"
+                name="fCandidate"
+                id="fCandidate"
                 class="w-full rounded-md bg-[#f7f7f7] py-3 px-6 text-base text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
@@ -379,7 +290,9 @@
             class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md"
           >
             <button
+              id="submitVote"
               type="button"
+              onclick="vote('Indonesia')"
               class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
             >
               Submit
@@ -389,6 +302,24 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script>
+      const vote = () => {
+        const payload = {
+          name: document.getElementById("fName").value,
+          email: document.getElementById("fEmail").value,
+          phone: document.getElementById("fPhone").value,
+          candidate: document.getElementById("fCandidate").value,
+        };
+
+        console.log(payload);
+      };
+
+      const openModal = async (candidate) => {
+        const label = document.getElementById("modalLabel");
+        label.innerHTML = `From Vote ${candidate}`;
+        document.getElementById("fCandidate").value = candidate;
+      };
+    </script>
   </body>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
   <script src="/index.js?v=1"></script>
