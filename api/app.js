@@ -52,12 +52,10 @@ app.post("/votes", async (req, res) => {
     const email = req.body.email;
     const candidate = req.body.candidate;
 
-    let date = new Date();
+    const date = new Date().toISOString().substring(0, 10);
 
     const haveVoteToday = await knex("votes")
-      // TODO: tambah batasan waktu
-      // .where("created_at", ">=", date.setHours(0, 0, 0, 0))
-      // .where("created_at", "<", date.setHours(23, 59, 59))
+      .where('date', date)
       .where((q) => q.where("email", email).orWhere("phone", phone))
       .first();
 
@@ -72,6 +70,7 @@ app.post("/votes", async (req, res) => {
       phone,
       email,
       candidate,
+      date
     });
 
     res.json({
@@ -80,6 +79,7 @@ app.post("/votes", async (req, res) => {
       phone,
       email,
       candidate,
+      date
     });
   } catch (e) {
     console.log(e);
