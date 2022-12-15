@@ -201,7 +201,7 @@
 
         const res = await fetch(
           // "https://daihatsu.co.id/daihatsu-setia-club-api/participants",
-          "/ddec-vote/-api/result",
+          "/ddec-vote-api/result",
           {
             method: "POST",
             headers: {
@@ -249,7 +249,7 @@
       const getVotes = async () => {
         try {
           const res = await fetch(
-            "/ddec-vote/-api/result",
+            "/ddec-vote-api/result",
             // "http://localhost:3000/result"
           );
           const data = await res.json();
